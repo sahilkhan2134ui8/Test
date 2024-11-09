@@ -5,16 +5,16 @@
 </head>
 <body>
     <h1>Code Editor</h1>
-    <form id="create-form">
+    <form id="create-form" action="/create" method="post">
         <input type="text" id="file-name" placeholder="File Name">
         <textarea id="file-content" placeholder="File Content"></textarea>
         <button id="create-button">Create File</button>
     </form>
-    <form id="run-form">
+    <form id="run-form" action="/run" method="post">
         <input type="text" id="run-file-name" placeholder="File Name">
         <button id="run-button">Run File</button>
     </form>
-    <div id="log-div" style="display: none;">
+    <div id="log-div">
         <h2>Log</h2>
         <pre id="log-content"></pre>
     </div>
@@ -61,8 +61,7 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.output);
-                document.getElementById('log-content').innerText = data.output;
+                logDiv.innerHTML = `<h2>Log</h2><pre>${data.output}</pre>`;
             })
             .catch((error) => {
                 console.error(error);
